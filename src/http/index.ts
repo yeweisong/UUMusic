@@ -1,0 +1,75 @@
+import Axios from "axios";
+const baseURL='https://y-cloud-music-api.vercel.app';
+
+const axios = Axios.create({
+    baseURL,
+    timeout: 20000 // 请求超时 20s
+})
+
+// 前置拦截器（发起请求之前的拦截）
+axios.interceptors.request.use(
+    (response) => {
+        /**
+         * 根据你的项目实际情况来对 config 做处理
+         * 这里对 config 不做任何处理，直接返回
+         */
+        return response
+    },
+    (error) => {
+        return Promise.reject(error)
+    }
+)
+
+// 后置拦截器（获取到响应时的拦截）
+axios.interceptors.response.use(
+    (response) => {
+        /**
+         * 根据你的项目实际情况来对 response 和 error 做处理
+         * 这里对 response 和 error 不做任何处理，直接返回
+         */
+        return response
+    },
+    (error) => {
+        if (error.response && error.response.data) {
+            const code = error.response.status
+            const msg = error.response.data.message
+            console.error(`[Axios Error]`, error.response)
+        }
+        return Promise.reject(error)
+    }
+)
+
+export default axios
+
+
+/* 统一封装get请求 */
+export const get = (url='', params={}, config = {}) => {
+    return new Promise((resolve, reject) => {
+        axios({
+            method: 'get',
+            url,
+            params,
+            ...config
+        }).then(response => {
+            resolve(response)
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
+
+/* 统一封装post请求  */
+export const post = (url='', data={}, config = {}) => {
+    return new Promise((resolve, reject) => {
+        axios({
+            method: 'post',
+            url,
+            data,
+            ...config
+        }).then(response => {
+            resolve(response)
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
