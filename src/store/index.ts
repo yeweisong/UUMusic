@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 
 const defaultState = {
-    count: 0
+    banners: []
 }
 
 // Create a new store instance.
@@ -10,18 +10,14 @@ export default createStore({
         return defaultState
     },
     mutations: {
-        increment(state: typeof defaultState) {
-            state.count++
+        setBanners(state: typeof defaultState,payload) {
+            state.banners=payload
         }
     },
     actions: {
-        increment(context) {
-            context.commit('increment')
-        }
+
     },
     getters: {
-        double(state: typeof defaultState) {
-            return 2 * state.count
-        }
+
     }
 })

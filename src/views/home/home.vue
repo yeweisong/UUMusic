@@ -5,20 +5,34 @@
         <Banner></Banner>
       </div>
         <Ball></Ball>
-        <bottomTabBar></bottomTabBar>
+      <template v-for="item in data.blocks" :key="item.showType">
+        <BaseBlock v-if="item.blockCode!=='HOMEPAGE_BANNER'" :blockData="item"></BaseBlock>
+      </template>
+      <BottomTabBar></BottomTabBar>
     </div>
 </template>
 
 <script setup>
-    import bottomTabBar from './components/bottomTabBar.vue'
+    import {useStore} from 'vuex'
+    import BottomTabBar from './components/bottomTabBar.vue'
     import Header from './components/header.vue'
     import Banner from './components/banner.vue'
     import Ball from './components/ball.vue'
-    import {getHomepage, getHomepageBall} from "@/http/api";
-    getHomepage().then(res=>{
-      console.log(res);
-    })
+    import BaseBlock from './components/baseBlock.vue'
+    import {getHomepage} from "@/http/api";
+    import {reactive} from "vue";
+    let store=useStore();
 
+    const data = reactive({
+      blocks:[]
+    })
+    getHomepage().then(res=>{
+      data.blocks=res.data.data.blocks;
+      const banner=res.data.data.blocks.find(item=>{
+        return item.blockCode==='HOMEPAGE_BANNER'
+      })
+      store.commit('setBanners',banner)
+    })
 </script>
 
 <style scoped lang="less">

@@ -54,7 +54,7 @@ const data = reactive({
 
 <style scoped lang="less">
 .tabBarWrap{
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   display: flex;

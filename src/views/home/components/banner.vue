@@ -9,7 +9,7 @@
         v-for="item in data.banner"
         :key="item.encodeId"
         class="swiper-slide">
-      <img class="img" :src="item.imageUrl" alt="">
+      <img class="img" :src="item.pic" alt="">
       <span :class="['typeTitle',
         {'titleRed':item.titleColor==='red',
         'titleBlue':item.titleColor==='blue'}]">
@@ -21,8 +21,8 @@
 </template>
 
 <script setup>
-import {reactive} from "vue";
-import {getBanner} from '@/http/api.js'
+import {computed,reactive} from "vue";
+import store from '@/store/index'
 import 'swiper/css';
 import 'swiper/less/pagination';
 import SwiperCore,{ Navigation, Pagination, EffectCoverflow, Autoplay } from 'swiper';
@@ -30,10 +30,7 @@ import {Swiper,SwiperSlide} from 'swiper/vue'
 
 SwiperCore.use([Autoplay, Pagination, EffectCoverflow,Navigation]);
 const data = reactive({
-  banner:[]
-})
-getBanner().then(res=>{
-  data.banner=res.data.banners;
+  banner:computed(()=>{return store.state?.banners?.extInfo?.banners})
 })
 
 </script>
