@@ -38,9 +38,12 @@
 <style scoped lang="less">
 .wrap{
   position: relative;
-  background: #fefefe;
+  background: #f8f8f8;
+  text-align: left;
   width: 100vw;
-  height: 100vh;
+  //height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 100px;
 
   .topContent{
     display: flex;

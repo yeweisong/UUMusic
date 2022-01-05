@@ -6,7 +6,6 @@
           <div class="swiperWrap">
             <Swiper
                 loop
-                EffectCube
                 :autoplay="{delay:4000}"
                 class="swiper-container">
               <SwiperSlide
@@ -29,17 +28,16 @@
 </template>
 
 <script setup>
-import {getCurrentInstance,reactive} from "vue";
+import {useAttrs,reactive} from "vue";
 import 'swiper/css';
-import 'swiper/less/pagination';
-import 'swiper/css/effect-cube'
-import SwiperCore,{ Navigation, Pagination, EffectCube, Autoplay } from 'swiper';
+
+import SwiperCore,{ Navigation,Pagination, Autoplay } from 'swiper';
 import {Swiper,SwiperSlide} from 'swiper/vue'
 
-const ctx=getCurrentInstance();
+const attrs=useAttrs();
 
 const data = reactive({
-  list:ctx.attrs.blockData.creatives
+  list:attrs.blockData.creatives
 })
 </script>
 

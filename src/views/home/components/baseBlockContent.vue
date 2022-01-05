@@ -1,9 +1,16 @@
 
 <script >
 import SlidePlayList from "./slidePlayList.vue";
+import SlideSongList from "./slideSongList.vue";
+import SlidePlayABLE from "./slidePlayABLE.vue";
+import MusicCalendar from "./musicCalendar.vue";
 import {h,} from 'vue'
+
 const blocksMap={
-  HOMEPAGE_SLIDE_PLAYLIST:SlidePlayList
+  HOMEPAGE_SLIDE_PLAYLIST:SlidePlayList,
+  HOMEPAGE_SLIDE_SONGLIST_ALIGN:SlideSongList,
+  HOMEPAGE_SLIDE_PLAYABLE_MLOG:SlidePlayABLE,
+  SHUFFLE_MUSIC_CALENDAR:MusicCalendar
 }
 
 export default {
@@ -17,7 +24,7 @@ export default {
     const {$props:{blockData}}=ctx;
     const {showType} =blockData;
     const conponent =blocksMap[showType];
-    return h(SlidePlayList,ctx.$props)
+    return h(conponent,ctx.$props)
   }
 
 

@@ -31,6 +31,7 @@ getHomepageBall().then(res=>{
   width: 100%;
   padding: 32px 0;
   overflow: hidden;
+  background-color: #fff;
   border-bottom: 1px solid #e6e6e6;
 
   .inner{
